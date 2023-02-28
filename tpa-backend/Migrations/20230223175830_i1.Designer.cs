@@ -12,7 +12,7 @@ using tpa_backend.Data;
 namespace tpa_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230222174725_i1")]
+    [Migration("20230223175830_i1")]
     partial class i1
     {
         /// <inheritdoc />
@@ -84,7 +84,7 @@ namespace tpa_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("City");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Day", b =>
@@ -111,7 +111,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("Day");
+                    b.ToTable("Days");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Difficulty", b =>
@@ -128,7 +128,7 @@ namespace tpa_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Difficulty");
+                    b.ToTable("Difficulties");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Interest", b =>
@@ -145,7 +145,7 @@ namespace tpa_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Interest");
+                    b.ToTable("Interests");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Landmark", b =>
@@ -183,7 +183,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("DifficultyId");
 
-                    b.ToTable("Landmark");
+                    b.ToTable("Landmarks");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.MovingType", b =>
@@ -200,7 +200,7 @@ namespace tpa_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MovingType");
+                    b.ToTable("MovingTypes");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.PersonalLandmark", b =>
@@ -233,7 +233,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("PersonalLandmark");
+                    b.ToTable("PersonalLandmarks");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Plan", b =>
@@ -280,7 +280,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Plan");
+                    b.ToTable("Plans");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.TimeSlot", b =>
@@ -313,7 +313,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("LandmarkId");
 
-                    b.ToTable("TimeSlot");
+                    b.ToTable("TimeSlots");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Tourist", b =>
@@ -338,7 +338,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tourist");
+                    b.ToTable("Tourists");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.User", b =>
@@ -362,7 +362,7 @@ namespace tpa_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.VisitCost", b =>
@@ -387,7 +387,7 @@ namespace tpa_backend.Migrations
 
                     b.HasIndex("LandmarkId");
 
-                    b.ToTable("VisitCost");
+                    b.ToTable("VisitCosts");
                 });
 
             modelBuilder.Entity("InterestLandmark", b =>

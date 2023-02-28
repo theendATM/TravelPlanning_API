@@ -10,7 +10,7 @@ namespace tpa_backend.Data
             Database.EnsureCreated();
         }
 
-        /*public DbSet<City> Cities { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<Day> Days { get; set; }
         public DbSet<Difficulty> Difficulties { get; set; }
         public DbSet<Interest> Interests { get; set; }
@@ -21,7 +21,7 @@ namespace tpa_backend.Data
         public DbSet<TimeSlot> TimeSlots { get; set; }
         public DbSet<Tourist> Tourists { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<VisitCost> VisitCosts  { get; set; }*/
+        public DbSet<VisitCost> VisitCosts  { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -84,8 +84,21 @@ namespace tpa_backend.Data
                 .WithMany(x => x.Tourists);
         
             modelBuilder.Entity<VisitCost>().HasKey(x => x.Id);
+
+
+            var user1 = new User()
+            {
+                Name = "Evgeniya",
+                Id = Guid.NewGuid(),
+                Email = "email",
+                Phone = "8980",
+                Plans = null,
+                Tourists = null,
+            };
+
+            modelBuilder.Entity<User>().HasData(user1);
         }
 
 
-       }
+    }
 }

@@ -9,8 +9,5 @@ namespace tpa_backend.DTOModels
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
-
-        [JsonPropertyName("landmarks")]
-        public List<LandmarkViewDTO> Landmarks { get; set; }
     }
 }

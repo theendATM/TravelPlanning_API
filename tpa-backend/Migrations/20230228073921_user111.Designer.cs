@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tpa_backend.Data;
 
@@ -11,9 +12,11 @@ using tpa_backend.Data;
 namespace tpa_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230228073921_user111")]
+    partial class user111
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -365,15 +368,6 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("974e51d5-afab-44c0-9fa7-dd08b39491ee"),
-                            Email = "email",
-                            Name = "Evgeniya",
-                            Phone = "8980"
-                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.VisitCost", b =>

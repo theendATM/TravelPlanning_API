@@ -16,7 +16,7 @@ namespace tpa_backend.Models
         public string Name { get; set; }
 
         [Required]
-        public IEnumerable<Interest> Interests { get; set; }
+        public IEnumerable<Interest>? Interests { get; set; }
 
         public User User { get; set; }
     }

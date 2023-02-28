@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using tpa_backend.Models;
 
 namespace tpa_backend.DTOModels
 {
@@ -17,10 +18,10 @@ namespace tpa_backend.DTOModels
         public string Email { get; set; }
 
         [JsonPropertyName("tourists")]
-        public List<TouristViewDTO> Tourists { get; set; }
+        public List<Tourist>? Tourists { get; set; }
 
         [JsonPropertyName("plans")]
-        public List<PlanViewDTO> Plans { get; set; }
+        public List<Plan>? Plans { get; set; }
     }
 
     public class UserCreateEditDTO

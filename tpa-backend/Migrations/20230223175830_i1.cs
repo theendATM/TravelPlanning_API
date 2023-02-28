@@ -12,7 +12,7 @@ namespace tpa_backend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "City",
+                name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Difficulty",
+                name: "Difficulties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,11 +34,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Difficulty", x => x.Id);
+                    table.PrimaryKey("PK_Difficulties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Interest",
+                name: "Interests",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -47,11 +47,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Interest", x => x.Id);
+                    table.PrimaryKey("PK_Interests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovingType",
+                name: "MovingTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -60,11 +60,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovingType", x => x.Id);
+                    table.PrimaryKey("PK_MovingTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -74,11 +74,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Landmark",
+                name: "Landmarks",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -92,23 +92,23 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Landmark", x => x.Id);
+                    table.PrimaryKey("PK_Landmarks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Landmark_City_CityId",
+                        name: "FK_Landmarks_Cities_CityId",
                         column: x => x.CityId,
-                        principalTable: "City",
+                        principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Landmark_Difficulty_DifficultyId",
+                        name: "FK_Landmarks_Difficulties_DifficultyId",
                         column: x => x.DifficultyId,
-                        principalTable: "Difficulty",
+                        principalTable: "Difficulties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Plan",
+                name: "Plans",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -125,23 +125,23 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Plan", x => x.Id);
+                    table.PrimaryKey("PK_Plans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Plan_City_CityId",
+                        name: "FK_Plans_Cities_CityId",
                         column: x => x.CityId,
-                        principalTable: "City",
+                        principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Plan_User_UserId",
+                        name: "FK_Plans_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tourist",
+                name: "Tourists",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -151,11 +151,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tourist", x => x.Id);
+                    table.PrimaryKey("PK_Tourists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tourist_User_UserId",
+                        name: "FK_Tourists_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -171,21 +171,21 @@ namespace tpa_backend.Migrations
                 {
                     table.PrimaryKey("PK_InterestLandmark", x => new { x.InterestsId, x.LandmarksId });
                     table.ForeignKey(
-                        name: "FK_InterestLandmark_Interest_InterestsId",
+                        name: "FK_InterestLandmark_Interests_InterestsId",
                         column: x => x.InterestsId,
-                        principalTable: "Interest",
+                        principalTable: "Interests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InterestLandmark_Landmark_LandmarksId",
+                        name: "FK_InterestLandmark_Landmarks_LandmarksId",
                         column: x => x.LandmarksId,
-                        principalTable: "Landmark",
+                        principalTable: "Landmarks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "VisitCost",
+                name: "VisitCosts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -196,17 +196,17 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VisitCost", x => x.Id);
+                    table.PrimaryKey("PK_VisitCosts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VisitCost_Landmark_LandmarkId",
+                        name: "FK_VisitCosts_Landmarks_LandmarkId",
                         column: x => x.LandmarkId,
-                        principalTable: "Landmark",
+                        principalTable: "Landmarks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Day",
+                name: "Days",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -217,17 +217,17 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Day", x => x.Id);
+                    table.PrimaryKey("PK_Days", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Day_Landmark_LandmarkWorkingHoursId",
+                        name: "FK_Days_Landmarks_LandmarkWorkingHoursId",
                         column: x => x.LandmarkWorkingHoursId,
-                        principalTable: "Landmark",
+                        principalTable: "Landmarks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Day_Plan_PlanId",
+                        name: "FK_Days_Plans_PlanId",
                         column: x => x.PlanId,
-                        principalTable: "Plan",
+                        principalTable: "Plans",
                         principalColumn: "Id");
                 });
 
@@ -242,21 +242,21 @@ namespace tpa_backend.Migrations
                 {
                     table.PrimaryKey("PK_MovingTypePlan", x => new { x.MovingTypesId, x.PlansId });
                     table.ForeignKey(
-                        name: "FK_MovingTypePlan_MovingType_MovingTypesId",
+                        name: "FK_MovingTypePlan_MovingTypes_MovingTypesId",
                         column: x => x.MovingTypesId,
-                        principalTable: "MovingType",
+                        principalTable: "MovingTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovingTypePlan_Plan_PlansId",
+                        name: "FK_MovingTypePlan_Plans_PlansId",
                         column: x => x.PlansId,
-                        principalTable: "Plan",
+                        principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonalLandmark",
+                name: "PersonalLandmarks",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -268,11 +268,11 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonalLandmark", x => x.Id);
+                    table.PrimaryKey("PK_PersonalLandmarks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PersonalLandmark_Plan_PlanId",
+                        name: "FK_PersonalLandmarks_Plans_PlanId",
                         column: x => x.PlanId,
-                        principalTable: "Plan",
+                        principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -288,21 +288,21 @@ namespace tpa_backend.Migrations
                 {
                     table.PrimaryKey("PK_InterestTourist", x => new { x.InterestsId, x.TouristsId });
                     table.ForeignKey(
-                        name: "FK_InterestTourist_Interest_InterestsId",
+                        name: "FK_InterestTourist_Interests_InterestsId",
                         column: x => x.InterestsId,
-                        principalTable: "Interest",
+                        principalTable: "Interests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InterestTourist_Tourist_TouristsId",
+                        name: "FK_InterestTourist_Tourists_TouristsId",
                         column: x => x.TouristsId,
-                        principalTable: "Tourist",
+                        principalTable: "Tourists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TimeSlot",
+                name: "TimeSlots",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -315,28 +315,28 @@ namespace tpa_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeSlot", x => x.Id);
+                    table.PrimaryKey("PK_TimeSlots", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TimeSlot_Day_DayId",
+                        name: "FK_TimeSlots_Days_DayId",
                         column: x => x.DayId,
-                        principalTable: "Day",
+                        principalTable: "Days",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TimeSlot_Landmark_LandmarkId",
+                        name: "FK_TimeSlots_Landmarks_LandmarkId",
                         column: x => x.LandmarkId,
-                        principalTable: "Landmark",
+                        principalTable: "Landmarks",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Day_LandmarkWorkingHoursId",
-                table: "Day",
+                name: "IX_Days_LandmarkWorkingHoursId",
+                table: "Days",
                 column: "LandmarkWorkingHoursId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Day_PlanId",
-                table: "Day",
+                name: "IX_Days_PlanId",
+                table: "Days",
                 column: "PlanId");
 
             migrationBuilder.CreateIndex(
@@ -350,13 +350,13 @@ namespace tpa_backend.Migrations
                 column: "TouristsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Landmark_CityId",
-                table: "Landmark",
+                name: "IX_Landmarks_CityId",
+                table: "Landmarks",
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Landmark_DifficultyId",
-                table: "Landmark",
+                name: "IX_Landmarks_DifficultyId",
+                table: "Landmarks",
                 column: "DifficultyId");
 
             migrationBuilder.CreateIndex(
@@ -365,38 +365,38 @@ namespace tpa_backend.Migrations
                 column: "PlansId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonalLandmark_PlanId",
-                table: "PersonalLandmark",
+                name: "IX_PersonalLandmarks_PlanId",
+                table: "PersonalLandmarks",
                 column: "PlanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plan_CityId",
-                table: "Plan",
+                name: "IX_Plans_CityId",
+                table: "Plans",
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plan_UserId",
-                table: "Plan",
+                name: "IX_Plans_UserId",
+                table: "Plans",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TimeSlot_DayId",
-                table: "TimeSlot",
+                name: "IX_TimeSlots_DayId",
+                table: "TimeSlots",
                 column: "DayId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TimeSlot_LandmarkId",
-                table: "TimeSlot",
+                name: "IX_TimeSlots_LandmarkId",
+                table: "TimeSlots",
                 column: "LandmarkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tourist_UserId",
-                table: "Tourist",
+                name: "IX_Tourists_UserId",
+                table: "Tourists",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VisitCost_LandmarkId",
-                table: "VisitCost",
+                name: "IX_VisitCosts_LandmarkId",
+                table: "VisitCosts",
                 column: "LandmarkId");
         }
 
@@ -413,40 +413,40 @@ namespace tpa_backend.Migrations
                 name: "MovingTypePlan");
 
             migrationBuilder.DropTable(
-                name: "PersonalLandmark");
+                name: "PersonalLandmarks");
 
             migrationBuilder.DropTable(
-                name: "TimeSlot");
+                name: "TimeSlots");
 
             migrationBuilder.DropTable(
-                name: "VisitCost");
+                name: "VisitCosts");
 
             migrationBuilder.DropTable(
-                name: "Interest");
+                name: "Interests");
 
             migrationBuilder.DropTable(
-                name: "Tourist");
+                name: "Tourists");
 
             migrationBuilder.DropTable(
-                name: "MovingType");
+                name: "MovingTypes");
 
             migrationBuilder.DropTable(
-                name: "Day");
+                name: "Days");
 
             migrationBuilder.DropTable(
-                name: "Landmark");
+                name: "Landmarks");
 
             migrationBuilder.DropTable(
-                name: "Plan");
+                name: "Plans");
 
             migrationBuilder.DropTable(
-                name: "Difficulty");
+                name: "Difficulties");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

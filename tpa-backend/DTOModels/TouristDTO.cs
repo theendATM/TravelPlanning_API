@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using tpa_backend.Models;
 
 namespace tpa_backend.DTOModels
 {
@@ -14,7 +15,7 @@ namespace tpa_backend.DTOModels
         public string Name { get; set; }
 
         [JsonPropertyName("interests")]
-        public List<InterestViewDTO> Interests { get; set; }
+        public List<Interest>? Interests { get; set; }
     }
 
     public class TouristCreateEditDTO
@@ -26,7 +27,7 @@ namespace tpa_backend.DTOModels
         public string Name { get; set; }
 
         [JsonPropertyName("interests")]
-        public List<InterestViewDTO> Interests { get; set; }
+        public List<Interest> Interests { get; set; }
     }
 
 }
