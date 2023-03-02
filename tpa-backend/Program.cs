@@ -43,5 +43,19 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITouristService, TouristService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
+app.MapDefaultControllerRoute();
+app.MapControllers();
+
+app.UseRouting();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapGet("/debug/routes", (IEnumerable<EndpointDataSource> endpointSources) =>
+        string.Join("\n", endpointSources.SelectMany(source => source.Endpoints)));
+}
+
 app.Run();

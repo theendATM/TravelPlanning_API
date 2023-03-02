@@ -17,6 +17,8 @@ namespace tpa_backend.Models
         public IEnumerable<Interest>? Interests { get; set; }
         public int? MinAge { get; set; }
         public int? MaxAge { get; set; }
+        public float? NorthernLatitude { get; set; }
+        public float? EasternLatitude { get; set; }
 
         public IEnumerable<Day>? WorkingDays { get; set; }
 

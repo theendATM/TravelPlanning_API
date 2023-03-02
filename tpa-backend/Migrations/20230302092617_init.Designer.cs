@@ -12,8 +12,8 @@ using tpa_backend.Data;
 namespace tpa_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230223175830_i1")]
-    partial class i1
+    [Migration("20230302092617_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,13 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Москва"
+                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Day", b =>
@@ -129,6 +136,33 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Difficulties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Очень низкий уровень сложности"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Низкий уровень сложности"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Средний уровень сложности"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Высокий уровень сложности"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Очень высокий уровень сложности"
+                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Interest", b =>
@@ -146,6 +180,133 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Interests");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Художественные музеи"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Исторические музеи"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Научные музеи"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Музеи естественной истории"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Технические музеи"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Музеи культуры"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Археологические места"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Крепости и замки"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Памятники архитектуры"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Памятники"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Религиозные места"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Памятники воинской и трудовой славы"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Национальные парки"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Заповедники"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Водопады"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Горы"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Водоемы"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Пляжи"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Парки развлечений"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Аквапарки"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Современные здания"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Экстремальные места"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Фестивали"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Театры"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Выставки"
+                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Landmark", b =>
@@ -163,6 +324,9 @@ namespace tpa_backend.Migrations
                     b.Property<int?>("DifficultyId")
                         .HasColumnType("int");
 
+                    b.Property<float?>("EasternLatitude")
+                        .HasColumnType("real");
+
                     b.Property<int?>("MaxAge")
                         .HasColumnType("int");
 
@@ -172,6 +336,9 @@ namespace tpa_backend.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("NorthernLatitude")
+                        .HasColumnType("real");
 
                     b.Property<int?>("VisitTime")
                         .IsRequired()
@@ -201,6 +368,33 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MovingTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Пешком"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Общественный транспорт"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Такси"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Личный автомобиль"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Самокат"
+                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.PersonalLandmark", b =>
@@ -363,6 +557,15 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("504e5073-8054-4f58-952b-e6d592fb993f"),
+                            Email = "email",
+                            Name = "Evgeniya",
+                            Phone = "8980"
+                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.VisitCost", b =>

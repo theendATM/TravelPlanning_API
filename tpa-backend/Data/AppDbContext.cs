@@ -7,7 +7,7 @@ namespace tpa_backend.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<City> Cities { get; set; }
@@ -97,6 +97,213 @@ namespace tpa_backend.Data
             };
 
             modelBuilder.Entity<User>().HasData(user1);
+
+
+
+            var int1=new Interest()
+                {
+                    Id = 1,
+                    Name = "Художественные музеи",
+                };
+            var int2 = (new Interest()
+                {
+                    Id = 2,
+                    Name = "Исторические музеи",
+                });
+            var int3 = (new Interest()
+                {
+                    Id = 3,
+                    Name = "Научные музеи",
+                });
+            var int4 = (new Interest()
+                {
+                    Id = 4,
+                    Name = "Музеи естественной истории",
+                });
+            var int5 = (new Interest()
+                {
+                    Id = 5,
+                    Name = "Технические музеи",
+                });
+            var int6 = (new Interest()
+                {
+                    Id = 6,
+                    Name = "Музеи культуры",
+                });
+            var int7 = (new Interest()
+               {
+                   Id = 7,
+                   Name = "Археологические места",
+               });
+            var int8 = (new Interest()
+               {
+                   Id = 8,
+                   Name = "Крепости и замки",
+               });
+            var int9 = (new Interest()
+               {
+                   Id = 9,
+                   Name = "Памятники архитектуры",
+               });
+            var int10 = (new Interest()
+              {
+                  Id = 10,
+                  Name = "Памятники",
+              });
+            var int11 = (new Interest()
+              {
+                  Id = 11,
+                  Name = "Религиозные места",
+              });
+            var int12 = (new Interest()
+              {
+                  Id = 12,
+                  Name = "Памятники воинской и трудовой славы",
+              });
+            var int13 = (new Interest()
+             {
+                 Id = 13,
+                 Name = "Национальные парки",
+             });
+            var int14 = (new Interest()
+             {
+                 Id = 14,
+                 Name = "Заповедники",
+             });
+            var int15 = (new Interest()
+             {
+                 Id = 15,
+                 Name = "Водопады",
+             });
+            var int16 = (new Interest()
+            {
+                Id = 16,
+                Name = "Горы",
+            });
+            var int17 = (new Interest()
+            {
+                Id = 17,
+                Name = "Водоемы",
+            });
+            var int18 = (new Interest()
+            {
+                Id = 18,
+                Name = "Пляжи",
+            });
+            var int19 = (new Interest()
+            {
+                Id = 19,
+                Name = "Парки развлечений",
+            });
+            var int20 = (new Interest()
+            {
+                Id = 20,
+                Name = "Аквапарки",
+            });
+            var int21 = (new Interest()
+            {
+                Id = 21,
+                Name = "Современные здания",
+            });
+            var int22 = (new Interest()
+            {
+                Id = 22,
+                Name = "Экстремальные места",
+            });
+            var int23 = (new Interest()
+            {
+                Id = 23,
+                Name = "Фестивали",
+            });
+            var int24 = (new Interest()
+            {
+                Id = 24,
+                Name = "Театры",
+            });
+            var int25 = (new Interest()
+            {
+                Id = 25,
+                Name = "Выставки",
+            });
+
+                modelBuilder.Entity<Interest>()
+                           .HasData(int1, int2, int3, int4, int5, int6, int7, int8,
+                           int9, int10, int11, int12, int13, int14, int15, int16, int17, int18,
+                           int19, int20, int21, int22, int23, int24, int25);
+
+
+
+            var mt1=(new MovingType()
+           {
+               Id = 1,
+               Name = "Пешком",
+           });
+            var mt2 = (new MovingType()
+          {
+              Id = 2,
+              Name = "Общественный транспорт",
+          });
+
+            var mt3 = (new MovingType()
+          {
+              Id = 3,
+              Name = "Такси",
+          });
+            var mt4 = (new MovingType()
+          {
+              Id = 4,
+              Name = "Личный автомобиль",
+          });
+            var mt5 = (new MovingType()
+          {
+              Id = 5,
+              Name = "Самокат",
+          });
+
+            modelBuilder.Entity<MovingType>()
+                           .HasData(mt1, mt2, mt3, mt4, mt5);
+
+
+            var d1=(new Difficulty()
+          {
+              Id = 1,
+              Name = "Очень низкий уровень сложности",
+          });
+
+            var d2=(new Difficulty()
+         {
+             Id = 2,
+             Name = "Низкий уровень сложности",
+         });
+
+            var d3=(new Difficulty()
+         {
+             Id = 3,
+             Name = "Средний уровень сложности",
+         });
+
+            var d4=(new Difficulty()
+         {
+             Id = 4,
+             Name = "Высокий уровень сложности",
+         });
+
+            var d5=(new Difficulty()
+         {
+             Id = 5,
+             Name = "Очень высокий уровень сложности",
+         });
+
+               modelBuilder.Entity<Difficulty>().HasData(d1, d2, d3, d4, d5);
+
+            var city1 = new City()
+            {
+                Id = 1,
+                Name = "Москва",
+            };
+            modelBuilder.Entity<City>().HasData(city1);    
+
+
         }
 
 

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace tpa_backend.Migrations
 {
     /// <inheritdoc />
-    public partial class i1 : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,6 +90,8 @@ namespace tpa_backend.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MinAge = table.Column<int>(type: "int", nullable: true),
                     MaxAge = table.Column<int>(type: "int", nullable: true),
+                    NorthernLatitude = table.Column<float>(type: "real", nullable: true),
+                    EasternLatitude = table.Column<float>(type: "real", nullable: true),
                     DifficultyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -328,6 +332,72 @@ namespace tpa_backend.Migrations
                         principalTable: "Landmarks",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Москва" });
+
+            migrationBuilder.InsertData(
+                table: "Difficulties",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Очень низкий уровень сложности" },
+                    { 2, "Низкий уровень сложности" },
+                    { 3, "Средний уровень сложности" },
+                    { 4, "Высокий уровень сложности" },
+                    { 5, "Очень высокий уровень сложности" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Interests",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Художественные музеи" },
+                    { 2, "Исторические музеи" },
+                    { 3, "Научные музеи" },
+                    { 4, "Музеи естественной истории" },
+                    { 5, "Технические музеи" },
+                    { 6, "Музеи культуры" },
+                    { 7, "Археологические места" },
+                    { 8, "Крепости и замки" },
+                    { 9, "Памятники архитектуры" },
+                    { 10, "Памятники" },
+                    { 11, "Религиозные места" },
+                    { 12, "Памятники воинской и трудовой славы" },
+                    { 13, "Национальные парки" },
+                    { 14, "Заповедники" },
+                    { 15, "Водопады" },
+                    { 16, "Горы" },
+                    { 17, "Водоемы" },
+                    { 18, "Пляжи" },
+                    { 19, "Парки развлечений" },
+                    { 20, "Аквапарки" },
+                    { 21, "Современные здания" },
+                    { 22, "Экстремальные места" },
+                    { 23, "Фестивали" },
+                    { 24, "Театры" },
+                    { 25, "Выставки" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MovingTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Пешком" },
+                    { 2, "Общественный транспорт" },
+                    { 3, "Такси" },
+                    { 4, "Личный автомобиль" },
+                    { 5, "Самокат" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Name", "Phone" },
+                values: new object[] { new Guid("504e5073-8054-4f58-952b-e6d592fb993f"), "email", "Evgeniya", "8980" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Days_LandmarkWorkingHoursId",

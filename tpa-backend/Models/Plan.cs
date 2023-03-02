@@ -23,7 +23,6 @@ namespace tpa_backend.Models
 
         public DateTime? ExitTime { get; set; }
         public DateTime? ComingTime { get; set; }
-        public IEnumerable<Difficulty>? Difficulties { get; set; }
 
         public IEnumerable<MovingType>? MovingTypes { get; set; }
 

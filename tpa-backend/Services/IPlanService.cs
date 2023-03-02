@@ -56,7 +56,6 @@ namespace tpa_backend.Services
                 Location = dto.Location,
                 ArrivalTime = dto.ArrivalTime,
                 DepartureTime = dto.DepartureTime,
-                Difficulties = dto.Difficulty,
                 ExitTime = dto.ExitTime,
                 ComingTime = dto.ComingTime,
                 MovingTypes = dto.MovingTypes,

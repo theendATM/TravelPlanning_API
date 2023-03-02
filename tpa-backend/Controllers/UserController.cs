@@ -7,7 +7,6 @@ using tpa_backend.Services;
 
 namespace tpa_backend.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -25,6 +24,7 @@ namespace tpa_backend.Controllers
         public IActionResult GetUser(Guid id)
         {
             try{
+                // get id from cookies 
                 return Ok(_userService.GetUser(id));
             }
             catch
@@ -34,8 +34,8 @@ namespace tpa_backend.Controllers
         }
 
         [HttpPatch]
-        [Route("profile/{id}/edit")]
-        public IActionResult EditUser(Guid userId, UserCreateEditDTO dto)
+        [Route("profile/edit/{userId}")]
+        public IActionResult EditUser(Guid userId, [FromBody]UserCreateEditDTO dto)
         {
             try
             {
@@ -50,11 +50,12 @@ namespace tpa_backend.Controllers
 
         [HttpPost]
         [Route("register")]
-        public IActionResult CreateUser(UserCreateEditDTO dto)
+        public IActionResult CreateUser([FromBody]UserCreateEditDTO dto)
         {
             try
             {
                 _userService.CreateUser(dto);
+                // save cookies
                 return Ok();
             }
             

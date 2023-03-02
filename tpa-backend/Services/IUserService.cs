@@ -23,11 +23,10 @@ namespace tpa_backend.Services
         private AppDbContext _context;
         /*private UserManager<User> _userManager;*/
 
-        /*public UserService(AppDbContext context, UserManager<User> userManager)
+        public UserService(AppDbContext context)
         {
             _context = context;
-            /*_userManager = userManager;
-        }*/
+        }
 
        /*public async Task<Guid> GetUserId(ClaimsPrincipal claimsPrincipal)
         {
@@ -49,8 +48,8 @@ namespace tpa_backend.Services
                 Name = user.Name,
                 Email = user.Email,
                 Phone = user.Phone,
-                Tourists =user.Tourists.ToList(),
-                Plans = user.Plans.ToList(),
+                Tourists = null,
+                Plans =null,
             };
         }
 
@@ -71,9 +70,13 @@ namespace tpa_backend.Services
 
         public void EditUser(Guid userId, UserCreateEditDTO dto)
         {
-            var user= _context.Users.FirstOrDefault(x => x.Id == userId);
+            Console.WriteLine(userId);
+            var user = _context.Users
+                .Include(x => x.Tourists)
+                .FirstOrDefault(x => x.Id == userId);
+
             if (user == null)
-                throw new IndexOutOfRangeException($"User with id {userId} is not found");
+                throw new KeyNotFoundException($"User with id {userId} is not found");
             user.Email = dto.Email;
             user.Phone = dto.Phone;
             user.Name = dto.Name;

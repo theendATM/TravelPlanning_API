@@ -5,8 +5,8 @@ namespace tpa_backend.DTOModels
 {
     public class UserViewDTO
     {
-        [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        /*[JsonPropertyName("id")]
+        public Guid Id { get; set; }*/
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
