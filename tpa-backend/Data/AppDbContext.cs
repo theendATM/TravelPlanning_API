@@ -51,10 +51,10 @@ namespace tpa_backend.Data
                 .HasMany(x => x.Landmarks)
                 .WithMany(x => x.Interests);
 
-            modelBuilder.Entity<Landmark>()
+            /*modelBuilder.Entity<Landmark>()
                 .HasMany(x => x.WorkingDays)
                 .WithOne(x => x.LandmarkWorkingHours )
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);*/
             modelBuilder.Entity<Landmark>()
                 .HasMany(x => x.VisitCosts)
                 .WithOne(x => x.Landmark)
@@ -77,6 +77,7 @@ namespace tpa_backend.Data
             modelBuilder.Entity<Tourist>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.Tourists)
+                
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Tourist>()
@@ -93,7 +94,7 @@ namespace tpa_backend.Data
                 Email = "email",
                 Phone = "8980",
                 Plans = null,
-                Tourists = null,
+                Tourists= null
             };
 
             modelBuilder.Entity<User>().HasData(user1);
@@ -243,7 +244,6 @@ namespace tpa_backend.Data
               Id = 2,
               Name = "Общественный транспорт",
           });
-
             var mt3 = (new MovingType()
           {
               Id = 3,
@@ -269,25 +269,21 @@ namespace tpa_backend.Data
               Id = 1,
               Name = "Очень низкий уровень сложности",
           });
-
             var d2=(new Difficulty()
          {
              Id = 2,
              Name = "Низкий уровень сложности",
          });
-
             var d3=(new Difficulty()
          {
              Id = 3,
              Name = "Средний уровень сложности",
          });
-
             var d4=(new Difficulty()
          {
              Id = 4,
              Name = "Высокий уровень сложности",
          });
-
             var d5=(new Difficulty()
          {
              Id = 5,
@@ -301,8 +297,46 @@ namespace tpa_backend.Data
                 Id = 1,
                 Name = "Москва",
             };
-            modelBuilder.Entity<City>().HasData(city1);    
+            modelBuilder.Entity<City>().HasData(city1);
 
+            /*var t1 = new Tourist()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Tourist",
+                User = user1,
+                Age = 15,
+                Interests = new List<Interest>()
+                {
+                    int1,int2, int3
+                },
+
+            };
+            var t2 = new Tourist()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Tourist2",
+                User = user1,
+                Age = 18,
+                Interests = new List<Interest>()
+                {
+                    int1,int2, int3, int5, int6, int8
+                },
+
+            };
+            Console.WriteLine( user1.Id);
+            var t3 = new Tourist()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Tourist3",
+                User = user1,
+                Age = 20,
+                Interests = new List<Interest>()
+                {
+                    int1,int2, int3, int5, int6, int8,int20,int21, int22, int23, int24, int25
+                },
+
+            };
+            modelBuilder.Entity<Tourist>().HasData(t1,t2,t3);*/
 
         }
 

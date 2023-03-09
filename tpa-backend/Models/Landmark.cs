@@ -5,7 +5,7 @@ namespace tpa_backend.Models
     public class Landmark
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -20,7 +20,7 @@ namespace tpa_backend.Models
         public float? NorthernLatitude { get; set; }
         public float? EasternLatitude { get; set; }
 
-        public IEnumerable<Day>? WorkingDays { get; set; }
+        //public IEnumerable<Day>? WorkingDays { get; set; }
 
         public Difficulty? Difficulty { get; set; }
 

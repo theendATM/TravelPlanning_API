@@ -83,7 +83,8 @@ namespace tpa_backend.Migrations
                 name: "Landmarks",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
                     VisitTime = table.Column<int>(type: "int", nullable: false),
@@ -169,7 +170,7 @@ namespace tpa_backend.Migrations
                 columns: table => new
                 {
                     InterestsId = table.Column<int>(type: "int", nullable: false),
-                    LandmarksId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    LandmarksId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,7 +197,7 @@ namespace tpa_backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cost = table.Column<int>(type: "int", nullable: false),
-                    LandmarkId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    LandmarkId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,18 +217,11 @@ namespace tpa_backend.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     WeekDay = table.Column<int>(type: "int", nullable: true),
-                    LandmarkWorkingHoursId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PlanId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Days", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Days_Landmarks_LandmarkWorkingHoursId",
-                        column: x => x.LandmarkWorkingHoursId,
-                        principalTable: "Landmarks",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Days_Plans_PlanId",
                         column: x => x.PlanId,
@@ -312,7 +306,7 @@ namespace tpa_backend.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LandmarkId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LandmarkId = table.Column<int>(type: "int", nullable: true),
                     ObligitaryVisit = table.Column<bool>(type: "bit", nullable: true),
                     VisitTime = table.Column<int>(type: "int", nullable: true),
                     DayId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -397,12 +391,7 @@ namespace tpa_backend.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Phone" },
-                values: new object[] { new Guid("504e5073-8054-4f58-952b-e6d592fb993f"), "email", "Evgeniya", "8980" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Days_LandmarkWorkingHoursId",
-                table: "Days",
-                column: "LandmarkWorkingHoursId");
+                values: new object[] { new Guid("35d39b9c-7760-450a-9d6d-811de4a6ab7b"), "email", "Evgeniya", "8980" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Days_PlanId",

@@ -5,7 +5,6 @@ using tpa_backend.Services;
 
 namespace tpa_backend.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class TouristController : Controller
     {
@@ -25,6 +24,20 @@ namespace tpa_backend.Controllers
             try
             {
                 return Ok(_touristService.GetTourist(touristId));
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("/tourists")]
+        public IActionResult GetTourists(Guid userId)
+        {
+            try
+            {
+                return Ok(_touristService.GetAllTourists(userId));
             }
             catch
             {

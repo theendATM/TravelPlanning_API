@@ -6,7 +6,7 @@ namespace tpa_backend.DTOModels
     public class LandmarkViewDTO
     {
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -36,9 +36,13 @@ namespace tpa_backend.DTOModels
         public List<DayViewDTO>? WorkingDays { get; set; }
 
         [JsonPropertyName("difficulty")]
-        public DifficultyViewDTO Difficulty { get; set; }
+        public Difficulty Difficulty { get; set; }
 
+        [JsonPropertyName("northern-latitude")]
+        public float? NorthernLatitude { get; set; }
 
+        [JsonPropertyName("eastern-latitude")]
+        public float? EasternLatitude { get; set; }
     }
 
 }

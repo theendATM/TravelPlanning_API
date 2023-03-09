@@ -13,6 +13,5 @@ namespace tpa_backend.Models
 
         public IEnumerable<TimeSlot>? TimeSlots { get; set; }
 
-        public Landmark? LandmarkWorkingHours { get; set; }
     }
 }

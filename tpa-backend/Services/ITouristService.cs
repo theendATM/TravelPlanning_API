@@ -12,6 +12,7 @@ namespace tpa_backend.Services
         public void EditTourist(TouristCreateEditDTO dto, Guid touristId);
         public TouristViewDTO GetTourist(Guid touristId);
         public void RemoveTourist(Guid touristId);
+        public List<TouristViewDTO> GetAllTourists(Guid userId);
     }
 
     public class TouristService : ITouristService
@@ -51,6 +52,18 @@ namespace tpa_backend.Services
             _context.SaveChanges();
         }
 
+        public List<TouristViewDTO> GetAllTourists(Guid userId)
+        {
+            var all = _context.Tourists.Include(x => x.Interests).Where(x => x.User.Id == userId)
+                .Select(x => new TouristViewDTO()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = x.Age,
+                    Interests = x.Interests.ToList(),
+                }).ToList();
+            return all;
+        }
 
         public TouristViewDTO GetTourist(Guid touristId)
         {

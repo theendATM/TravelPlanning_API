@@ -12,7 +12,7 @@ using tpa_backend.Data;
 namespace tpa_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230302092617_init")]
+    [Migration("20230306053043_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -30,8 +30,8 @@ namespace tpa_backend.Migrations
                     b.Property<int>("InterestsId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("LandmarksId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("LandmarksId")
+                        .HasColumnType("int");
 
                     b.HasKey("InterestsId", "LandmarksId");
 
@@ -103,9 +103,6 @@ namespace tpa_backend.Migrations
                     b.Property<DateTime?>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LandmarkWorkingHoursId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("PlanId")
                         .HasColumnType("uniqueidentifier");
 
@@ -113,8 +110,6 @@ namespace tpa_backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LandmarkWorkingHoursId");
 
                     b.HasIndex("PlanId");
 
@@ -311,9 +306,11 @@ namespace tpa_backend.Migrations
 
             modelBuilder.Entity("tpa_backend.Models.Landmark", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -489,8 +486,8 @@ namespace tpa_backend.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LandmarkId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("LandmarkId")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("ObligitaryVisit")
                         .HasColumnType("bit");
@@ -561,7 +558,7 @@ namespace tpa_backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("504e5073-8054-4f58-952b-e6d592fb993f"),
+                            Id = new Guid("35d39b9c-7760-450a-9d6d-811de4a6ab7b"),
                             Email = "email",
                             Name = "Evgeniya",
                             Phone = "8980"
@@ -583,8 +580,8 @@ namespace tpa_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("LandmarkId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("LandmarkId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -640,16 +637,9 @@ namespace tpa_backend.Migrations
 
             modelBuilder.Entity("tpa_backend.Models.Day", b =>
                 {
-                    b.HasOne("tpa_backend.Models.Landmark", "LandmarkWorkingHours")
-                        .WithMany("WorkingDays")
-                        .HasForeignKey("LandmarkWorkingHoursId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("tpa_backend.Models.Plan", null)
                         .WithMany("Days")
                         .HasForeignKey("PlanId");
-
-                    b.Navigation("LandmarkWorkingHours");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Landmark", b =>
@@ -759,8 +749,6 @@ namespace tpa_backend.Migrations
             modelBuilder.Entity("tpa_backend.Models.Landmark", b =>
                 {
                     b.Navigation("VisitCosts");
-
-                    b.Navigation("WorkingDays");
                 });
 
             modelBuilder.Entity("tpa_backend.Models.Plan", b =>
