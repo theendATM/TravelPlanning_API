@@ -14,7 +14,7 @@ namespace tpa_backend.Controllers
             _landmarkService=landmarkService;
         }
 
-            [HttpGet]
+            /*[HttpGet]
             [Route("/landmarks")]
             public IActionResult Landmarks()
             {
@@ -27,6 +27,6 @@ namespace tpa_backend.Controllers
                 {
                     return StatusCode(500);
                 }
-            }
+            }*/
         }
 }

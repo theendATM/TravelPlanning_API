@@ -48,6 +48,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITouristService, TouristService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<ILandmarkService, LandmarkService>();
+builder.Services.AddScoped<ISelectInfoService , SelectInfoService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -5,7 +5,7 @@ namespace tpa_backend.Services
 {
     public interface ILandmarkService
     {
-        public List<LandmarkViewDTO> GetLandmarks();
+        //public List<LandmarkViewDTO> GetLandmarks();
     }
 
     public class LandmarkService : ILandmarkService
@@ -16,7 +16,7 @@ namespace tpa_backend.Services
             _context=context;
         }
 
-        public List<LandmarkViewDTO> GetLandmarks()
+        /*public List<LandmarkViewDTO> GetLandmarks()
         {
             var landmarks=_context.Landmarks.Select(x => new LandmarkViewDTO
             {
@@ -33,6 +33,6 @@ namespace tpa_backend.Services
             }).ToList();
 
             return landmarks;
-        }
+        }*/
     }
 }
