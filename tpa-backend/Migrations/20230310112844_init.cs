@@ -72,6 +72,7 @@ namespace tpa_backend.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -387,11 +388,6 @@ namespace tpa_backend.Migrations
                     { 4, "Личный автомобиль" },
                     { 5, "Самокат" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Email", "Name", "Phone" },
-                values: new object[] { new Guid("35d39b9c-7760-450a-9d6d-811de4a6ab7b"), "email", "Evgeniya", "8980" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Days_PlanId",

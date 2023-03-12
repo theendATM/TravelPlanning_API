@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using tpa_backend.Models;
 
 namespace tpa_backend.Data
@@ -87,17 +88,19 @@ namespace tpa_backend.Data
             modelBuilder.Entity<VisitCost>().HasKey(x => x.Id);
 
 
-            var user1 = new User()
+            /*var user1 = new User()
             {
                 Name = "Evgeniya",
                 Id = Guid.NewGuid(),
                 Email = "email",
                 Phone = "8980",
                 Plans = null,
-                Tourists= null
+                Tourists= null,
+                Password = "12345678",
+         
             };
 
-            modelBuilder.Entity<User>().HasData(user1);
+            modelBuilder.Entity<User>().HasData(user1);*/
 
 
 

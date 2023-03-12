@@ -76,8 +76,9 @@ namespace tpa_backend.Controllers
             }
         }
 
+
         [HttpPost]
-        [ActionName("DeleteTourist")]
+        [Route("tourist/delete")]
         public IActionResult DeleteTourist(Guid touristId)
         {
             try

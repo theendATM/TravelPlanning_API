@@ -544,6 +544,10 @@ namespace tpa_backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -551,15 +555,6 @@ namespace tpa_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("35d39b9c-7760-450a-9d6d-811de4a6ab7b"),
-                            Email = "email",
-                            Name = "Evgeniya",
-                            Phone = "8980"
-                        });
                 });
 
             modelBuilder.Entity("tpa_backend.Models.VisitCost", b =>

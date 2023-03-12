@@ -1,7 +1,12 @@
 ﻿
+using GoogleApi.Entities;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using tpa_backend.Data;
 using tpa_backend.DTOModels;
 using tpa_backend.Models;
@@ -16,16 +21,20 @@ namespace tpa_backend.Services
         public void EditUser(Guid userId, UserCreateEditDTO dto);
 
         public void CreateUser(UserCreateEditDTO dto);
+
+        public string HashPasswordFunction(string password);
     }
 
     public class UserService : IUserService
     {
         private AppDbContext _context;
+        private IConfiguration _configuration;
         /*private UserManager<User> _userManager;*/
 
-        public UserService(AppDbContext context)
+        public UserService(AppDbContext context,  IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
        /*public async Task<Guid> GetUserId(ClaimsPrincipal claimsPrincipal)
@@ -57,16 +66,25 @@ namespace tpa_backend.Services
         
         public void CreateUser(UserCreateEditDTO dto)
         {
+            var userExists=_context.Users.FirstOrDefault(x=>x.Email==dto.Email);
+            if (userExists != null)
+                throw new IndexOutOfRangeException($"User with email or phone number already exists");
             var user = new User
             {
                 Email = dto.Email,
-                Phone= dto.Phone,
+                Phone = dto.Phone,
                 Name = dto.Name,
-                Id= Guid.NewGuid(),
+                Id = Guid.NewGuid(),
+                Password = HashPasswordFunction(dto.Password),
+                
             };
             _context.Users.Add(user);
             _context.SaveChanges();
+
         }
+
+
+
 
         public void EditUser(Guid userId, UserCreateEditDTO dto)
         {
@@ -82,6 +100,16 @@ namespace tpa_backend.Services
             user.Name = dto.Name;
 
             _context.SaveChanges();
+        }
+
+        public string HashPasswordFunction(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashed = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var hash = BitConverter.ToString(hashed).Replace("-", "").ToLower();
+                return hash;
+            }
         }
     }
 }

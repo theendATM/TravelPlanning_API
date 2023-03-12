@@ -47,6 +47,10 @@ namespace tpa_backend.Services
         
         public void CreatePlan(PlanCreateDTO dto)
         {
+
+
+
+
             var plan = new Plan
             {
                 Id=Guid.NewGuid(),

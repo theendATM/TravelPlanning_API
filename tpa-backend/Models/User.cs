@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace tpa_backend.Models
 {
@@ -17,10 +18,13 @@ namespace tpa_backend.Models
         public string Password { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        public string Phone{ get; set; }
+
 
         public IEnumerable<Tourist>? Tourists { get; set; }
 
         public IEnumerable<Plan>? Plans { get; set; }
     }
+
+
 }
