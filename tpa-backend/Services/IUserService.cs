@@ -16,9 +16,9 @@ namespace tpa_backend.Services
     public interface IUserService
     {
         /*Task<Guid> GetUserId(ClaimsPrincipal claimsPrincipal);*/
-        public UserViewDTO GetUser(Guid userId);
+        public UserViewDTO GetUser(string email);
 
-        public void EditUser(Guid userId, UserCreateEditDTO dto);
+        public void EditUser(EditName dto);
 
         public void CreateUser(UserCreateEditDTO dto);
 
@@ -45,20 +45,22 @@ namespace tpa_backend.Services
             return user.Id;
         } */
 
-        public UserViewDTO GetUser(Guid userId)
+        public UserViewDTO GetUser(string email)
         {
             var user = _context.Users
                 .Include(x=>x.Tourists)
-                .FirstOrDefault(x => x.Id == userId);
+                .Include(x=>x.Plans)
+                .FirstOrDefault(x => x.Email == email);
             if (user == null)
-                throw new IndexOutOfRangeException($"User with id {userId} is not found");
+                throw new IndexOutOfRangeException($"User with id {email} is not found");
+            Console.WriteLine(user.Tourists);
             return new UserViewDTO()
             {
                 Name = user.Name,
                 Email = user.Email,
                 Phone = user.Phone,
-                Tourists = null,
-                Plans =null,
+                Tourists = user.Tourists,
+                Plans = user.Plans,
             };
         }
 
@@ -86,16 +88,13 @@ namespace tpa_backend.Services
 
 
 
-        public void EditUser(Guid userId, UserCreateEditDTO dto)
+        public void EditUser(EditName dto)
         {
-            Console.WriteLine(userId);
             var user = _context.Users
-                .Include(x => x.Tourists)
-                .FirstOrDefault(x => x.Id == userId);
+                .FirstOrDefault(x => x.Email == dto.Email);
 
             if (user == null)
-                throw new KeyNotFoundException($"User with id {userId} is not found");
-            user.Email = dto.Email;
+                throw new KeyNotFoundException($"User is not found");
             user.Phone = dto.Phone;
             user.Name = dto.Name;
 

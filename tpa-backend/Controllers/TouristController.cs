@@ -17,36 +17,10 @@ namespace tpa_backend.Controllers
             _userService=userService;
         }
 
-        [HttpGet]
-        [Route("/tourist/{id}")]
-        public IActionResult GetTouristInfo(Guid touristId)
-        {
-            try
-            {
-                return Ok(_touristService.GetTourist(touristId));
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
 
-        [HttpGet]
-        [Route("/tourists")]
-        public IActionResult GetTourists(Guid userId)
-        {
-            try
-            {
-                return Ok(_touristService.GetAllTourists(userId));
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
 
         [HttpPatch]
-        [Route("tourist/{id}/edit")]
+        [Route("tourist/edit")]
         public IActionResult EditUser(Guid touristId,TouristCreateEditDTO dto)
         {
             try
@@ -62,11 +36,11 @@ namespace tpa_backend.Controllers
 
         [HttpPost]
         [Route("tourist/add")]
-        public IActionResult CreateTourist(TouristCreateEditDTO dto, Guid userId)
+        public IActionResult CreateTourist(TouristCreateEditDTO dto)
         {
             try
             {
-                _touristService.CreateTourist(dto, userId);
+                _touristService.CreateTourist(dto);
                 return Ok();
             }
 
@@ -79,11 +53,11 @@ namespace tpa_backend.Controllers
 
         [HttpPost]
         [Route("tourist/delete")]
-        public IActionResult DeleteTourist(Guid touristId)
+        public IActionResult DeleteTourist([FromBody] TouristDeleteDTO dto)
         {
             try
             {
-                _touristService.RemoveTourist(touristId);
+                _touristService.RemoveTourist(dto.Id);
                 return Ok() ;
             }
             catch

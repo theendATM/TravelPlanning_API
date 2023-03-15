@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace tpa_backend.Models
 {
@@ -18,6 +19,7 @@ namespace tpa_backend.Models
         [Required]
         public IEnumerable<Interest>? Interests { get; set; }
 
+        [JsonIgnore]
         public User User { get; set; }
     }
 }

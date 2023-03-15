@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using tpa_backend.Data;
 using tpa_backend.Models;
 using tpa_backend.Services;
@@ -24,11 +27,18 @@ builder.Services.AddCors(options =>
                           policy.AllowCredentials();
                           policy.WithExposedHeaders("*");
                           policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
                       });
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+JsonSerializerOptions options = new()
+{
+    ReferenceHandler = ReferenceHandler.IgnoreCycles,
+    WriteIndented = true
+};
 
 //builder.Services.AddIdentity<User, IdentityRole>()
 //                .AddEntityFrameworkStores<AppDbContext>();
@@ -43,6 +53,24 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //    options.Password.RequiredLength = 6;
 //    options.Password.RequiredUniqueChars = 1;
 //});
+
+/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "MyAppCookie";
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnValidatePrincipal = context =>
+            {
+                // Your validation logic here
+                return Task.CompletedTask;
+            }
+        };
+    });*/
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => options.LoginPath = "/login");
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITouristService, TouristService>();
@@ -60,6 +88,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 //app.UseIdentity();
+app.UseCors(MyAllowSpecificOrigins);
 
 if (app.Environment.IsDevelopment())
 {

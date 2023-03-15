@@ -19,10 +19,10 @@ namespace tpa_backend.DTOModels
         public string Email { get; set; }
 
         [JsonPropertyName("tourists")]
-        public List<Tourist>? Tourists { get; set; }
+        public IEnumerable<Tourist>? Tourists { get; set; }
 
         [JsonPropertyName("plans")]
-        public List<Plan>? Plans { get; set; }
+        public IEnumerable<Plan>? Plans { get; set; }
     }
 
     public class UserCreateEditDTO
@@ -60,5 +60,26 @@ namespace tpa_backend.DTOModels
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
+    }
+
+    public class EmailData
+    {
+        [JsonPropertyName("email")]
+        [Required(ErrorMessage = "Введите email")]
+        public string Email { get; set; }
+    }
+
+    public class EditName
+    {
+        [JsonPropertyName("name")]
+        [Required(ErrorMessage = "Введите имя")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("email")]
+        [Required(ErrorMessage = "Введите email")]
+        public string Email { get; set; }
+
+        [JsonPropertyName("phone")]
+        public string Phone { get; set; }
     }
 }

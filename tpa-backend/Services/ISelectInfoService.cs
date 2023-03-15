@@ -19,12 +19,12 @@ namespace tpa_backend.Services
         AppDbContext _context;
         public SelectInfoService(AppDbContext context)
         {
-            _context=context;
+            _context = context;
         }
 
         public List<CityViewDTO> GetCities()
         {
-            var cities =_context.Cities.Select(c => new CityViewDTO
+            var cities = _context.Cities.Select(c => new CityViewDTO
             {
                 Name = c.Name,
             }).ToList();
@@ -42,15 +42,15 @@ namespace tpa_backend.Services
             return diffs;
         }
 
-            public List<MovingTypeViewDTO> GetMovingTypes()
-            {   
+        public List<MovingTypeViewDTO> GetMovingTypes()
+        {
             var mt = _context.MovingTypes.Select(c => new MovingTypeViewDTO
             {
                 Name = c.Name,
             }).ToList();
 
             return mt;
-            }
+        }
 
         public List<InterestViewDTO> GetInterests()
         {
@@ -65,7 +65,7 @@ namespace tpa_backend.Services
         public List<LandmarkViewDTO> GetMereLandmarks(MereLandmarkViewModel dto)
         {
 
-            var landmarks = _context.Landmarks.Include(x => x.Interests)
+            /*var landmarks = _context.Landmarks.Include(x => x.Interests)
                 .Where(l => l.City == dto.City && dto.Interests.Intersect(l.Interests) != null)
                 .Select(l => new LandmarkViewDTO
                 {
@@ -77,9 +77,30 @@ namespace tpa_backend.Services
                     MinAge = l.MinAge,
                     MaxAge = l.MaxAge,
                     Difficulty = l.Difficulty,
-                }).ToList();
+                }).ToList();*/
 
+            var interestIds = _context.Interests.ToList();
+            var ids=new List<int>();
+            foreach(var interest in interestIds)
+            {
+                ids.Add(interest.Id);
+            }
+            var landmarks = _context.Landmarks.Include(x => x.Interests)
+                .Where(l => l.City.Id == dto.CityId && dto.InterestIds.Intersect(ids) != null)
+                .Select(l => new LandmarkViewDTO
+                {
+                    Name = l.Name,
+                    City = l.City,
+                    Interests = l.Interests.ToList(),
+                    VisitCost = l.VisitCosts.ToList(),
+                    VisitTime = l.VisitTime,
+                    MinAge = l.MinAge,
+                    MaxAge = l.MaxAge,
+                    Difficulty = l.Difficulty,
+                }).ToList();
+            Console.WriteLine(landmarks);
             return landmarks;
+
         }
     }
 }

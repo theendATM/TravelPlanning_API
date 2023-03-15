@@ -8,11 +8,9 @@ namespace tpa_backend.Services
 {
     public interface ITouristService
     {
-        public void CreateTourist(TouristCreateEditDTO dto, Guid userId);
+        public void CreateTourist(TouristCreateEditDTO dto);
         public void EditTourist(TouristCreateEditDTO dto, Guid touristId);
-        public TouristViewDTO GetTourist(Guid touristId);
         public void RemoveTourist(Guid touristId);
-        public List<TouristViewDTO> GetAllTourists(Guid userId);
     }
 
     public class TouristService : ITouristService
@@ -23,9 +21,9 @@ namespace tpa_backend.Services
             _context=context;
         }
 
-        public void CreateTourist(TouristCreateEditDTO dto, Guid userId)
+        public void CreateTourist(TouristCreateEditDTO dto)
         {
-            var user=_context.Users.FirstOrDefault(x=>x.Id==userId);
+            var user=_context.Users.FirstOrDefault(x=>x.Email==dto.UserEmail);
             if(user==null)
                 throw new IndexOutOfRangeException($"Error");
             var tourist = new Tourist
@@ -33,7 +31,7 @@ namespace tpa_backend.Services
                 Id = Guid.NewGuid(),
                 Name = dto.Name,
                 Age = dto.Age,
-                Interests = dto.Interests.ToList(),
+                Interests = dto.Interests,
                 User = user,
             };
             _context.Tourists.Add(tourist);
@@ -52,35 +50,12 @@ namespace tpa_backend.Services
             _context.SaveChanges();
         }
 
-        public List<TouristViewDTO> GetAllTourists(Guid userId)
-        {
-            var all = _context.Tourists.Include(x => x.Interests).Where(x => x.User.Id == userId)
-                .Select(x => new TouristViewDTO()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Age = x.Age,
-                    Interests = x.Interests.ToList(),
-                }).ToList();
-            return all;
-        }
-
-        public TouristViewDTO GetTourist(Guid touristId)
-        {
-            var tourist=_context.Tourists.Include(x=>x.Interests)
-                .FirstOrDefault(x=>x.Id == touristId);
-            return new TouristViewDTO
-            {
-                Id = tourist.Id,
-                Name = tourist.Name,
-                Age = tourist.Age,
-                Interests = tourist.Interests.ToList(),
-            };
-        }
 
         public void RemoveTourist(Guid touristId)
         {
             var tourist= _context.Tourists.Find(touristId);
+            if(tourist==null)
+                throw new IndexOutOfRangeException($"Tourist is not found");
             _context.Tourists.Remove(tourist);
             _context.SaveChanges();
         }

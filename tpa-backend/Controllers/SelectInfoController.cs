@@ -74,11 +74,14 @@ namespace tpa_backend.Controllers
         {
             try
             {
-
-                return Ok(_selectInfoController.GetMereLandmarks( model));
+                _selectInfoController.GetMereLandmarks(model);
+                return StatusCode(200);
+                //return Ok(_selectInfoController.GetMereLandmarks( model));
             }
-            catch
+            catch(Exception e)
             {
+
+                Console.WriteLine(e.Message);
                 return StatusCode(500);
             }
         }

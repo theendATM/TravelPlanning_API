@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace tpa_backend.Models
 {
@@ -29,6 +30,7 @@ namespace tpa_backend.Models
         public IEnumerable<Day>? Days { get; set; }
 
         [Required]
+        [JsonIgnore]
         public User User { get; set; }
 
 

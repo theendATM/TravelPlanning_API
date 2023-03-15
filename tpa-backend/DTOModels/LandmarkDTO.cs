@@ -47,11 +47,14 @@ namespace tpa_backend.DTOModels
 
     public class MereLandmarkViewModel
     {
-        [JsonPropertyName("city")]
-        public City City { get; set; }
+        //[JsonPropertyName("city")]
+        //public City City { get; set; }
+
+        [JsonPropertyName("cityId")]
+        public int CityId { get; set; }
 
         [JsonPropertyName("interests")]
-        public List<Interest>? Interests { get; set; }
+        public List<int>? InterestIds { get; set; }
     }
 
 }

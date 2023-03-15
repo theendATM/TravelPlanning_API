@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace tpa_backend.Models
 {
@@ -9,6 +10,7 @@ namespace tpa_backend.Models
         public string Name { get; set; }
 
         public IEnumerable<Landmark>? Landmarks { get; set; }
+        [JsonIgnore]
         public IEnumerable<Plan>? Plans { get; set; }
     }
 }
