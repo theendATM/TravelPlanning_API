@@ -62,7 +62,7 @@ namespace tpa_backend.Services
                 DepartureTime = dto.DepartureTime,
                 ExitTime = dto.ExitTime,
                 ComingTime = dto.ComingTime,
-                MovingTypes = dto.MovingTypes,
+                //MovingTypes = dto.MovingTypes,
             };
             _context.Plans.Add(plan);
             _context.SaveChanges();

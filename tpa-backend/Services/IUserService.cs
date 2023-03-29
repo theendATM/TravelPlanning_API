@@ -49,6 +49,7 @@ namespace tpa_backend.Services
         {
             var user = _context.Users
                 .Include(x=>x.Tourists)
+                .ThenInclude(x=>x.Interests)
                 .Include(x=>x.Plans)
                 .FirstOrDefault(x => x.Email == email);
             if (user == null)

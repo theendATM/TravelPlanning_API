@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using tpa_backend.DTOModels;
 using tpa_backend.Services;
 
 namespace tpa_backend.Controllers
@@ -14,19 +15,36 @@ namespace tpa_backend.Controllers
             _landmarkService=landmarkService;
         }
 
-            /*[HttpGet]
-            [Route("/landmarks")]
-            public IActionResult Landmarks()
+        [HttpGet]
+        [Route("mereLandmarks")]
+        public IActionResult GetMereLandmarks([FromQuery] MereLandmarkViewModel model)
+        {
+            try
             {
-                try
-                {
-                    _landmarkService.GetLandmarks();
-                    return Ok();
-                }
-                catch
-                {
-                    return StatusCode(500);
-                }
-            }*/
+                return Ok(_landmarkService.GetMereLandmarks(model));
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return StatusCode(500);
+            }
         }
+
+        [HttpGet]
+        [Route("suitableLandmarks")]
+        public IActionResult GetSuitableLandmarks([FromQuery] SuitableLandmarksViewModel model)
+        {
+            try
+            {
+                return Ok(_landmarkService.GetSuitableLandmarks(model));
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return StatusCode(500);
+            }
+        }
+    }
 }

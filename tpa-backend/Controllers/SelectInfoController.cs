@@ -68,7 +68,7 @@ namespace tpa_backend.Controllers
             }
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("mereLandmarks")]
         public IActionResult GetMereLandmarks(MereLandmarkViewModel model)
         {
@@ -84,6 +84,6 @@ namespace tpa_backend.Controllers
                 Console.WriteLine(e.Message);
                 return StatusCode(500);
             }
-        }
+        }*/
     }
 }

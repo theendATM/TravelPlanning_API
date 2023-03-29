@@ -43,7 +43,7 @@ namespace tpa_backend.DTOModels
 
     public class PlanCreateDTO
     {
-
+        //1
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -52,6 +52,15 @@ namespace tpa_backend.DTOModels
 
         [JsonPropertyName("budget")]
         public int? Budget { get; set; }
+
+
+        [JsonPropertyName("tourist-ids")]
+        public List<Guid>? TouristIds { get; set; }
+
+        [JsonPropertyName("difficulty-ids")]
+        public int[]? DifficultyIds { get; set; }
+
+        //3
 
         [JsonPropertyName("location")]
         public string? Location { get; set; }
@@ -62,8 +71,8 @@ namespace tpa_backend.DTOModels
         [JsonPropertyName("departure-time")]
         public DateTime? DepartureTime { get; set; }
 
-        [JsonPropertyName("difficulty")]
-        public List<Difficulty>? Difficulty { get; set; }
+        [JsonPropertyName("moving-types-ids")]
+        public int[]? MovingTypeIds { get; set; }
 
         [JsonPropertyName("exit-time")]
         public DateTime? ExitTime { get; set; }
@@ -71,8 +80,10 @@ namespace tpa_backend.DTOModels
         [JsonPropertyName("coming-time")]
         public DateTime? ComingTime { get; set; }
 
-        [JsonPropertyName("moving-types")]
-        public List<MovingType>? MovingTypes { get; set; }
+        //2
+        [JsonPropertyName("landmarks-ids")]
+        public int[]? LandmarkIds { get; set; }
+
     }
 
 

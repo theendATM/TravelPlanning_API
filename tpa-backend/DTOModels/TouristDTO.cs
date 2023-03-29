@@ -26,11 +26,32 @@ namespace tpa_backend.DTOModels
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("interests")]
-        public IEnumerable<Interest> Interests { get; set; }
+        //[JsonPropertyName("interests")]
+        //public IEnumerable<Interest> Interests { get; set; }
+
+        [JsonPropertyName("interest-ids")]
+        public List<int>? InterestIds { get; set; }
 
         [JsonPropertyName("user-email")]
         public string UserEmail { get; set; }
+    }
+
+    public class TouristEditDTO
+    {
+        [JsonPropertyName("age")]
+        public int Age { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        //[JsonPropertyName("interests")]
+        //public IEnumerable<Interest> Interests { get; set; }
+
+        [JsonPropertyName("interest-ids")]
+        public List<int>? InterestIds { get; set; }
+
+        [JsonPropertyName("tourist-id")]
+        public Guid TouristId { get; set; }
     }
 
     public class TouristDeleteDTO

@@ -11,7 +11,6 @@ namespace tpa_backend.Services
         public List<MovingTypeViewDTO> GetMovingTypes();
         public List<DifficultyViewDTO> GetDifficulties();
         public List<InterestViewDTO> GetInterests();
-        public List<LandmarkViewDTO> GetMereLandmarks(MereLandmarkViewModel dto);
     }
 
     public class SelectInfoService : ISelectInfoService
@@ -26,6 +25,7 @@ namespace tpa_backend.Services
         {
             var cities = _context.Cities.Select(c => new CityViewDTO
             {
+                Id=c.Id,
                 Name = c.Name,
             }).ToList();
 
@@ -36,6 +36,7 @@ namespace tpa_backend.Services
         {
             var diffs = _context.Difficulties.Select(c => new DifficultyViewDTO
             {
+                Id = c.Id,
                 Name = c.Name,
             }).ToList();
 
@@ -46,6 +47,7 @@ namespace tpa_backend.Services
         {
             var mt = _context.MovingTypes.Select(c => new MovingTypeViewDTO
             {
+                Id = c.Id,
                 Name = c.Name,
             }).ToList();
 
@@ -56,51 +58,13 @@ namespace tpa_backend.Services
         {
             var interests = _context.Interests.Select(c => new InterestViewDTO
             {
+                Id = c.Id,
                 Name = c.Name,
             }).ToList();
 
             return interests;
         }
 
-        public List<LandmarkViewDTO> GetMereLandmarks(MereLandmarkViewModel dto)
-        {
-
-            /*var landmarks = _context.Landmarks.Include(x => x.Interests)
-                .Where(l => l.City == dto.City && dto.Interests.Intersect(l.Interests) != null)
-                .Select(l => new LandmarkViewDTO
-                {
-                    Name = l.Name,
-                    City = l.City,
-                    Interests = l.Interests.ToList(),
-                    VisitCost = l.VisitCosts.ToList(),
-                    VisitTime = l.VisitTime,
-                    MinAge = l.MinAge,
-                    MaxAge = l.MaxAge,
-                    Difficulty = l.Difficulty,
-                }).ToList();*/
-
-            var interestIds = _context.Interests.ToList();
-            var ids=new List<int>();
-            foreach(var interest in interestIds)
-            {
-                ids.Add(interest.Id);
-            }
-            var landmarks = _context.Landmarks.Include(x => x.Interests)
-                .Where(l => l.City.Id == dto.CityId && dto.InterestIds.Intersect(ids) != null)
-                .Select(l => new LandmarkViewDTO
-                {
-                    Name = l.Name,
-                    City = l.City,
-                    Interests = l.Interests.ToList(),
-                    VisitCost = l.VisitCosts.ToList(),
-                    VisitTime = l.VisitTime,
-                    MinAge = l.MinAge,
-                    MaxAge = l.MaxAge,
-                    Difficulty = l.Difficulty,
-                }).ToList();
-            Console.WriteLine(landmarks);
-            return landmarks;
-
-        }
+        
     }
 }

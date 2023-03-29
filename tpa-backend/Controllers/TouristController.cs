@@ -21,11 +21,11 @@ namespace tpa_backend.Controllers
 
         [HttpPatch]
         [Route("tourist/edit")]
-        public IActionResult EditUser(Guid touristId,TouristCreateEditDTO dto)
+        public IActionResult EditUser(TouristEditDTO dto)
         {
             try
             {
-                _touristService.EditTourist(dto, touristId);
+                _touristService.EditTourist(dto);
                 return Ok();
             }
             catch
@@ -59,6 +59,21 @@ namespace tpa_backend.Controllers
             {
                 _touristService.RemoveTourist(dto.Id);
                 return Ok() ;
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("tourist/interests")]
+        public IActionResult GetTouristInterests([FromQuery]Guid id)
+        {
+            try
+            {
+                
+                return Ok(_touristService.GetTouristInterests(id));
             }
             catch
             {
